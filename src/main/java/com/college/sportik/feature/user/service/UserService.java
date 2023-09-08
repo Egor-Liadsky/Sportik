@@ -11,7 +11,7 @@ public interface UserService {
 
     void registerUser(UserDTOResponse userDTOResponse);
 
-    UserDTOResponse authUser(UserDTOReceive userDTOReceive);
+    Object authUser(UserDTOReceive userDTOReceive);
 }
 
 @Service
@@ -25,17 +25,26 @@ class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserDTOResponse userDTOResponse) {
-        repository.save(new UserEntity(
-                userDTOResponse.getId(),
-                userDTOResponse.getUsername(),
-                userDTOResponse.getFirstName(),
-                userDTOResponse.getLastName(),
-                userDTOResponse.getPassword()
-        ));
+        if (repository.findByUsername(userDTOResponse.getUsername()) == null) {
+            repository.save(new UserEntity(
+                    userDTOResponse.getId(),
+                    userDTOResponse.getUsername(),
+                    userDTOResponse.getFirstName(),
+                    userDTOResponse.getLastName(),
+                    userDTOResponse.getPassword()
+            ));
+        } else {
+            throw new RuntimeException("user already exist");
+        }
     }
 
     @Override
     public UserDTOResponse authUser(UserDTOReceive userDTOReceive) {
-         return new UserDTOResponse(0, "1", "2", "3", "4");
+        UserDTOResponse user = repository.findByUsername(userDTOReceive.getUsername());
+        if (user != null && user.getPassword().equals(userDTOReceive.getPassword())) {
+            return user;
+        } else {
+            throw new RuntimeException("invalid username or password");
+        }
     }
 }
