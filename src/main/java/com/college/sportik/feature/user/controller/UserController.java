@@ -17,11 +17,11 @@ public class UserController {
 
     @GetMapping
     UserDTOResponse authUser(@RequestBody UserDTOReceive userDTOReceive) {
-        return (UserDTOResponse) userService.authUser(userDTOReceive);
+        return userService.authUser(userDTOReceive);
     }
 
     @PostMapping
-    void registerUser(@RequestBody UserDTOResponse userDTOResponse) {
-        userService.registerUser(userDTOResponse);
+    UserDTOResponse registerUser(@RequestBody UserDTOResponse userDTOResponse) {
+        return userService.registerUser(userDTOResponse);
     }
 }
