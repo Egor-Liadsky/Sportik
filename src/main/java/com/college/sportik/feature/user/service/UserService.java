@@ -1,17 +1,17 @@
 package com.college.sportik.feature.user.service;
 
 import com.college.sportik.feature.user.entity.UserEntity;
-import com.college.sportik.feature.user.models.UserModelDTOReceive;
-import com.college.sportik.feature.user.models.UserModelDTOResponse;
+import com.college.sportik.feature.user.dto.UserDTOReceive;
+import com.college.sportik.feature.user.dto.UserDTOResponse;
 import com.college.sportik.feature.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-interface UserService {
+public interface UserService {
 
-    void registerUser(UserModelDTOResponse userModelDTOResponse);
+    void registerUser(UserDTOResponse userDTOResponse);
 
-    UserModelDTOResponse authUser(UserModelDTOReceive userModelDTOReceive);
+    UserDTOResponse authUser(UserDTOReceive userDTOReceive);
 }
 
 @Service
@@ -24,18 +24,18 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(UserModelDTOResponse userModelDTOResponse) {
+    public void registerUser(UserDTOResponse userDTOResponse) {
         repository.save(new UserEntity(
-                userModelDTOResponse.getId(),
-                userModelDTOResponse.getUsername(),
-                userModelDTOResponse.getFirstName(),
-                userModelDTOResponse.getLastName(),
-                userModelDTOResponse.getPassword()
+                userDTOResponse.getId(),
+                userDTOResponse.getUsername(),
+                userDTOResponse.getFirstName(),
+                userDTOResponse.getLastName(),
+                userDTOResponse.getPassword()
         ));
     }
 
     @Override
-    public UserModelDTOResponse authUser(UserModelDTOReceive userModelDTOReceive) {
-         return new UserModelDTOResponse(0, "1", "2", "3", "4");
+    public UserDTOResponse authUser(UserDTOReceive userDTOReceive) {
+         return new UserDTOResponse(0, "1", "2", "3", "4");
     }
 }

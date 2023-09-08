@@ -1,6 +1,6 @@
-package com.college.sportik.feature.user.models;
+package com.college.sportik.feature.user.dto;
 
-public class UserModelDTOResponse {
+public class UserDTOResponse {
 
     Integer id;
     String username;
@@ -8,7 +8,7 @@ public class UserModelDTOResponse {
     String lastName;
     String password;
 
-    public UserModelDTOResponse(Integer id, String username, String firstName, String lastName, String password) {
+    public UserDTOResponse(Integer id, String username, String firstName, String lastName, String password) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
