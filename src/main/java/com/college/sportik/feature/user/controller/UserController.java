@@ -24,4 +24,9 @@ public class UserController {
     UserDTOResponse registerUser(@RequestBody UserDTOResponse userDTOResponse) {
         return userService.registerUser(userDTOResponse);
     }
+
+    @DeleteMapping("/{id}")
+    String deleteUser(@PathVariable("id") Long id) {
+         return userService.deleteUser(id);
+    }
 }

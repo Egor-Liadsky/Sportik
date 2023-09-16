@@ -19,16 +19,20 @@ public class UserEntity {
     @Column(name = "lastName", nullable = false)
     String lastName;
 
+    @Column(name = "role", nullable = false)
+    String role;
+
     @Column(name = "password", nullable = false)
     String password;
 
     UserEntity() {  }
 
-    public UserEntity(Integer id, String username, String firstName, String lastName, String password) {
+    public UserEntity(Integer id, String username, String firstName, String lastName, String role, String password) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
         this.password = password;
     }
     public long getId() {
@@ -65,6 +69,14 @@ public class UserEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setPassword(String password) {

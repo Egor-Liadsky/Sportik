@@ -1,0 +1,9 @@
+#services:
+#  database:
+#    image: mysql
+#    restart: always
+#    ports:
+#      - "3307:3307"
+#    environment:
+#      - MYSQL_DB=zafir
+#      - MYSQL_ROOT_PASSWORD=qwertydevix12

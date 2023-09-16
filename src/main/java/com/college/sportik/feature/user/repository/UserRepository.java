@@ -2,6 +2,7 @@ package com.college.sportik.feature.user.repository;
 
 import com.college.sportik.feature.user.dto.UserDTOResponse;
 import com.college.sportik.feature.user.entity.UserEntity;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
