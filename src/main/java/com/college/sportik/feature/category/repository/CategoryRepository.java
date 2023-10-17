@@ -15,6 +15,6 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity, Long>
 
     @Modifying
     @Transactional
-    @Query("update CategoryEntity u set u.title = ?2, u.code = ?3 WHERE u.id = ?1")
+    @Query("update CategoryEntity u set u.title = ?2, u.code = ?3 where u.id = ?1")
     void updateCategory(Integer id, String title, String code);
 }

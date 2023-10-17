@@ -2,7 +2,7 @@ package com.college.sportik.feature.category.entity;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "category")
 public class CategoryEntity {
 
     @Id

@@ -2,7 +2,7 @@ package com.college.sportik.feature.user.entity;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "user")
 public class UserEntity {
 
     @Id

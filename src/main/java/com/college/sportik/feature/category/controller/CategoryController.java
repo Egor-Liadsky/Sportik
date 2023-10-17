@@ -3,7 +3,6 @@ package com.college.sportik.feature.category.controller;
 import com.college.sportik.feature.category.dto.CategoryDTOReceive;
 import com.college.sportik.feature.category.dto.CategoryDTOResponse;
 import com.college.sportik.feature.category.service.CategoryService;
-import com.college.sportik.feature.user.dto.UserDTOResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
