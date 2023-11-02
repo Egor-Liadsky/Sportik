@@ -8,9 +8,8 @@ public class SubDimensionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    Integer id;
+    @Column(name = "sub_dimension_id")
+    private Integer id;
 
-    @Column(name = "dimension", nullable = false)
-    String dimension;
+    private Integer dimension;
 }

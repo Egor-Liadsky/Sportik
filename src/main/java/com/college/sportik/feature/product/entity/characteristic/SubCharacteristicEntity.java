@@ -8,12 +8,12 @@ public class SubCharacteristicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sub_characteristic_id", nullable = false)
-    Integer id;
+    @Column(name = "sub_characteristic_id")
+    private Integer id;
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @Column
+    private String title;
 
-    @Column(name = "description", nullable = false)
-    String description;
+    @Column
+    private String description;
 }

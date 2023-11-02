@@ -1,5 +1,6 @@
 package com.college.sportik.feature.product.entity.image;
 
+import com.college.sportik.feature.product.entity.ProductEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,9 +9,13 @@ public class ImageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "images_id", nullable = false)
-    Integer id;
+    @Column(name = "image_id")
+    private Integer id;
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
+
+    @Column
+    private String title;
 }

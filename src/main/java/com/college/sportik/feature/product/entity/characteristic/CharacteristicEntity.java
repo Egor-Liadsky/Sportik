@@ -12,17 +12,56 @@ public class CharacteristicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "characteristics_id", nullable = false)
-    Integer id;
+    @Column(name = "characteristic_id")
+    private Integer id;
 
-    @Column(name = "title", nullable = false)
-    String title;
-
-    @OneToMany
-    @JoinColumn(name = "sub_characteristic_id")
-    List<SubCharacteristicEntity> subCharacteristicEntity;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private ProductEntity product;
+
+    @Column(length = 255)
+    private String title;
+
+    @OneToMany
+    @JoinTable(name = "sub_characteristic")
+    private List<SubCharacteristicEntity> subCharacteristics;
+
+    public CharacteristicEntity(Integer id, ProductEntity product, String title, List<SubCharacteristicEntity> subCharacteristics) {
+        this.id = id;
+        this.product = product;
+        this.title = title;
+        this.subCharacteristics = subCharacteristics;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<SubCharacteristicEntity> getSubCharacteristics() {
+        return subCharacteristics;
+    }
+
+    public void setSubCharacteristics(List<SubCharacteristicEntity> subCharacteristics) {
+        this.subCharacteristics = subCharacteristics;
+    }
 }
