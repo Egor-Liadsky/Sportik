@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
-    ProductDTOResponse findById(Integer id);
+//    ProductDTOResponse findById(Integer id);
 }

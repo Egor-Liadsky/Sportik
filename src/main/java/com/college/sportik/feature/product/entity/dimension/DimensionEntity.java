@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity(name = "dimension")
+@Entity
+@Table(name = "dimension")
 public class DimensionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "dimensions_id", nullable = false)
     Integer id;
 
     @Column(name = "title", nullable = false)

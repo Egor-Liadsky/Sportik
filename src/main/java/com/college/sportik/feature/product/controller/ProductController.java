@@ -10,19 +10,19 @@ import java.util.Optional;
 @RequestMapping("/api/product")
 public class ProductController {
 
-    private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @GetMapping("/{id}")
-    Optional<ProductDTOResponse> getProductById(@PathVariable("id") Long id) {
-        return productService.getProductById(id);
-    }
-
-    @PostMapping
-    ProductDTOResponse createProduct(@RequestBody ProductDTOResponse productDTOResponse) {
-        return productService.createProduct(productDTOResponse);
-    }
+//    private final ProductService productService;
+//
+//    public ProductController(ProductService productService) {
+//        this.productService = productService;
+//    }
+//
+//    @GetMapping("/{id}")
+//    Optional<ProductDTOResponse> getProductById(@PathVariable("id") Long id) {
+//        return productService.getProductById(id);
+//    }
+//
+//    @PostMapping
+//    ProductDTOResponse createProduct(@RequestBody ProductDTOResponse productDTOResponse) {
+//        return productService.createProduct(productDTOResponse);
+//    }
 }

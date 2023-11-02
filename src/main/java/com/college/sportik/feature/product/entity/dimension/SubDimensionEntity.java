@@ -2,7 +2,8 @@ package com.college.sportik.feature.product.entity.dimension;
 
 import jakarta.persistence.*;
 
-@Entity(name = "sub_dimension")
+@Entity
+@Table(name = "sub_dimension")
 public class SubDimensionEntity {
 
     @Id
