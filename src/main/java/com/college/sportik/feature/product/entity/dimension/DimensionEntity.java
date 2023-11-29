@@ -20,9 +20,6 @@ public class DimensionEntity {
     @Column(length = 50)
     private String title;
 
-    @ManyToMany
-    @JoinTable(name = "dimension_sub_dimension",
-            joinColumns = @JoinColumn(name = "dimension_id"),
-            inverseJoinColumns = @JoinColumn(name = "sub_dimension_id"))
+    @OneToMany(mappedBy = "dimension")
     private List<SubDimensionEntity> subDimensions;
 }

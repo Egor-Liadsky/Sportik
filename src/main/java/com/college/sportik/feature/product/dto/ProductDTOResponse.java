@@ -1,20 +1,53 @@
 package com.college.sportik.feature.product.dto;
 
+import java.util.List;
+
 public class ProductDTOResponse {
     Integer id;
     String title;
+    String brand;
     String description;
-    String category;
+    String color;
+    String price;
+    String vendorCode;
+    String category_id;
     String dateCreated;
-    Integer views;
 
-    public ProductDTOResponse(Integer id, String title, String description, String category, String dateCreated, Integer views) {
+    List<CharacteristicDTOResponse> characteristics;
+    List<DimensionDTOResponse> dimensions;
+    List<ImageDTOResponse> images;
+
+    @Override
+    public String toString() {
+        return "ProductDTOResponse{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", brand='" + brand + '\'' +
+                ", description='" + description + '\'' +
+                ", color='" + color + '\'' +
+                ", price='" + price + '\'' +
+                ", vendorCode='" + vendorCode + '\'' +
+                ", category_id=" + category_id +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", characteristics=" + characteristics +
+                ", dimensions=" + dimensions +
+                ", images=" + images +
+                '}';
+    }
+
+    public ProductDTOResponse(Integer id, String title, String brand, String description, String color, String price, String vendorCode, String category_id, String dateCreated, List<CharacteristicDTOResponse> characteristics, List<DimensionDTOResponse> dimensions, List<ImageDTOResponse> images) {
         this.id = id;
         this.title = title;
+        this.brand = brand;
         this.description = description;
-        this.category = category;
+        this.color = color;
+        this.price = price;
+        this.vendorCode = vendorCode;
+        this.category_id = category_id;
         this.dateCreated = dateCreated;
-        this.views = views;
+        this.characteristics = characteristics;
+        this.dimensions = dimensions;
+        this.images = images;
     }
 
     public Integer getId() {
@@ -33,6 +66,14 @@ public class ProductDTOResponse {
         this.title = title;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -41,12 +82,36 @@ public class ProductDTOResponse {
         this.description = description;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getVendorCode() {
+        return vendorCode;
+    }
+
+    public void setVendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
+    }
+
     public String getCategory() {
-        return category;
+        return category_id;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.category_id = category;
     }
 
     public String getDateCreated() {
@@ -57,11 +122,27 @@ public class ProductDTOResponse {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getViews() {
-        return views;
+    public List<CharacteristicDTOResponse> getCharacteristics() {
+        return characteristics;
     }
 
-    public void setViews(Integer views) {
-        this.views = views;
+    public void setCharacteristics(List<CharacteristicDTOResponse> characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public List<DimensionDTOResponse> getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(List<DimensionDTOResponse> dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public List<ImageDTOResponse> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageDTOResponse> images) {
+        this.images = images;
     }
 }

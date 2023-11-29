@@ -22,8 +22,7 @@ public class CharacteristicEntity {
     @Column(length = 255)
     private String title;
 
-    @OneToMany
-    @JoinTable(name = "sub_characteristic")
+    @OneToMany(mappedBy = "characteristic")
     private List<SubCharacteristicEntity> subCharacteristics;
 
     public CharacteristicEntity(Integer id, ProductEntity product, String title, List<SubCharacteristicEntity> subCharacteristics) {

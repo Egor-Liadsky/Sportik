@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>CategoryController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CategoryController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.college.sportik.feature.category.controller</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.college.sportik.feature.category.dto.CategoryDTOReceive</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.college.sportik.feature.category.dto.CategoryDTOResponse</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.college.sportik.feature.category.service.CategoryService</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.springframework.web.bind.annotation.*</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Optional</span><span class="s0">;</span>
+
+<span class="s1">@RestController</span>
+<span class="s1">@RequestMapping(</span><span class="s2">&quot;/api/category&quot;</span><span class="s1">)</span>
+<span class="s0">public class </span><span class="s1">CategoryController {</span>
+
+    <span class="s0">private final </span><span class="s1">CategoryService categoryService</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">CategoryController(CategoryService categoryService) {</span>
+        <span class="s0">this</span><span class="s1">.categoryService = categoryService</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@GetMapping(</span><span class="s2">&quot;/{id}&quot;</span><span class="s1">)</span>
+    <span class="s1">Optional&lt;CategoryDTOResponse&gt; getCategory(@PathVariable(</span><span class="s2">&quot;id&quot;</span><span class="s1">) Long id) {</span>
+        <span class="s0">return </span><span class="s1">categoryService.getCategory(id)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@GetMapping</span>
+    <span class="s1">List&lt;CategoryDTOResponse&gt; getCategories() {</span>
+        <span class="s0">return </span><span class="s1">categoryService.getCategories()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@PostMapping</span>
+    <span class="s1">CategoryDTOResponse createCategory(@RequestBody CategoryDTOResponse categoryDTOResponse) {</span>
+        <span class="s0">return </span><span class="s1">categoryService.createCategory(categoryDTOResponse)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@PutMapping(</span><span class="s2">&quot;/{id}&quot;</span><span class="s1">)</span>
+    <span class="s1">CategoryDTOResponse updateCategory(@PathVariable(</span><span class="s2">&quot;id&quot;</span><span class="s1">) Long id</span><span class="s0">, </span><span class="s1">@RequestBody CategoryDTOReceive categoryDTOReceive) {</span>
+        <span class="s0">return </span><span class="s1">categoryService.updateCategory(id</span><span class="s0">, </span><span class="s1">categoryDTOReceive)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@DeleteMapping(</span><span class="s2">&quot;/{id}&quot;</span><span class="s1">)</span>
+    <span class="s1">String deleteCategory(@PathVariable(</span><span class="s2">&quot;id&quot;</span><span class="s1">) Long id) {</span>
+        <span class="s0">return </span><span class="s1">categoryService.deleteCategory(id)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

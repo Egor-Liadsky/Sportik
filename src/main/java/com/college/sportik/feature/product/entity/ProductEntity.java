@@ -7,7 +7,6 @@ import com.college.sportik.feature.product.entity.image.ImageEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -18,7 +17,7 @@ public class ProductEntity {
     @Column(name = "product_id")
     private Integer id;
 
-    @Column(length = 50)
+    @Column(name = "vendor_code")
     private String vendorCode;
 
     @Column
@@ -27,15 +26,18 @@ public class ProductEntity {
     @Column
     private String description;
 
-    @Column(length = 255)
+    @Column
     private String brand;
 
-    private Integer price;
+    private String price;
 
-    @Column(length = 255)
+    @Column
     private String color;
 
-    @OneToOne
+    @Column(name = "date_created")
+    private String dateCreated;
+
+    @ManyToOne
     @JoinColumn(name = "category")
     private CategoryEntity category;
 
@@ -47,4 +49,117 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product")
     private List<ImageEntity> images;
+
+    ProductEntity() { }
+
+    public ProductEntity(Integer id, String vendorCode, String title, String description, String brand, String price, String color, String dateCreated, CategoryEntity category, List<CharacteristicEntity> characteristics, List<DimensionEntity> dimensions, List<ImageEntity> images) {
+        this.id = id;
+        this.vendorCode = vendorCode;
+        this.title = title;
+        this.description = description;
+        this.brand = brand;
+        this.price = price;
+        this.color = color;
+        this.dateCreated = dateCreated;
+        this.category = category;
+        this.characteristics = characteristics;
+        this.dimensions = dimensions;
+        this.images = images;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getVendorCode() {
+        return vendorCode;
+    }
+
+    public void setVendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
+
+    public List<CharacteristicEntity> getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(List<CharacteristicEntity> characteristics) {
+        this.characteristics = characteristics;
+    }
+
+    public List<DimensionEntity> getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(List<DimensionEntity> dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public List<ImageEntity> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageEntity> images) {
+        this.images = images;
+    }
 }

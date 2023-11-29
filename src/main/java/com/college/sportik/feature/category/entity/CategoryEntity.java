@@ -3,6 +3,7 @@ package com.college.sportik.feature.category.entity;
 import jakarta.persistence.*;
 
 @Entity(name = "category")
+@Table(name = "category")
 public class CategoryEntity {
 
     @Id

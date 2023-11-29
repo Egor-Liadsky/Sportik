@@ -1,5 +1,6 @@
 package com.college.sportik.feature.product.entity.dimension;
 
+import com.college.sportik.feature.product.entity.characteristic.CharacteristicEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,5 +12,9 @@ public class SubDimensionEntity {
     @Column(name = "sub_dimension_id")
     private Integer id;
 
-    private Integer dimension;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dimension_id")
+    private DimensionEntity dimension;
+
+    private Integer size;
 }
