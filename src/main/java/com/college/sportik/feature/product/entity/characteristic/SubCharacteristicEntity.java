@@ -1,7 +1,5 @@
 package com.college.sportik.feature.product.entity.characteristic;
 
-import com.college.sportik.feature.product.entity.ProductEntity;
-import com.college.sportik.feature.product.entity.dimension.DimensionEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +12,7 @@ public class SubCharacteristicEntity {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "characteristic")
+    @JoinColumn(name = "characteristic_id")
     private CharacteristicEntity characteristic;
 
     @Column
@@ -22,6 +20,8 @@ public class SubCharacteristicEntity {
 
     @Column
     private String description;
+
+    SubCharacteristicEntity() {  }
 
     public SubCharacteristicEntity(Integer id, CharacteristicEntity characteristic, String title, String description) {
         this.id = id;

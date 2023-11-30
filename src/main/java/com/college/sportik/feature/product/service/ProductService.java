@@ -10,6 +10,6 @@ import java.util.List;
 public interface ProductService {
 
     ProductDTOResponse createProduct(ProductDTOResponse productDTOResponse);
-
+    ProductDTOReceive getProductById(Long id);
     List<ProductDTOReceive> getProducts();
 }

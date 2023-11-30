@@ -30,6 +30,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into sub_characteristic (sub_characteristic_id, description, title, characteristic) VALUES (?1, ?2, ?3, ?4)", nativeQuery = true)
+    @Query(value = "insert into sub_characteristic (sub_characteristic_id, description, title, characteristic_id) VALUES (?1, ?2, ?3, ?4)", nativeQuery = true)
     void createSubCharacteristic(Integer id, String description, String title, Integer characteristic);
 }

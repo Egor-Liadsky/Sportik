@@ -25,6 +25,8 @@ public class CharacteristicEntity {
     @OneToMany(mappedBy = "characteristic")
     private List<SubCharacteristicEntity> subCharacteristics;
 
+    CharacteristicEntity() {  }
+
     public CharacteristicEntity(Integer id, ProductEntity product, String title, List<SubCharacteristicEntity> subCharacteristics) {
         this.id = id;
         this.product = product;
