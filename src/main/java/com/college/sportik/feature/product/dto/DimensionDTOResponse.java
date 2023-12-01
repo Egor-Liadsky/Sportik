@@ -19,6 +19,13 @@ public class DimensionDTOResponse {
                 '}';
     }
 
+    public DimensionDTOResponse(Integer id, String title, List<SubDimensionDTOResponse> subDimensions, Integer productId) {
+        this.id = id;
+        this.title = title;
+        this.subDimensions = subDimensions;
+        this.productId = productId;
+    }
+
     public Integer getId() {
         return id;
     }

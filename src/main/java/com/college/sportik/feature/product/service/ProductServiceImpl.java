@@ -8,10 +8,7 @@ import com.college.sportik.feature.product.entity.ProductEntity;
 import com.college.sportik.feature.product.entity.characteristic.CharacteristicEntity;
 import com.college.sportik.feature.product.entity.characteristic.SubCharacteristicEntity;
 import com.college.sportik.feature.product.entity.image.ImageEntity;
-import com.college.sportik.feature.product.repository.CharacteristicRepository;
-import com.college.sportik.feature.product.repository.ImageRepository;
-import com.college.sportik.feature.product.repository.ProductRepository;
-import com.college.sportik.feature.product.repository.SubCharacteristicRepository;
+import com.college.sportik.feature.product.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,21 +22,28 @@ public class ProductServiceImpl implements ProductService {
     private final ImageRepository imageRepository;
     private final CharacteristicRepository characteristicRepository;
     private final SubCharacteristicRepository subCharacteristicRepository;
+    private final DimensionRepository dimensionRepository;
+    private final SubDimensionRepository subDimensionRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, ImageRepository imageRepository, CharacteristicRepository characteristicRepository, SubCharacteristicRepository subCharacteristicRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, ImageRepository imageRepository, CharacteristicRepository characteristicRepository, SubCharacteristicRepository subCharacteristicRepository, DimensionRepository dimensionRepository, SubDimensionRepository subDimensionRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.imageRepository = imageRepository;
         this.characteristicRepository = characteristicRepository;
         this.subCharacteristicRepository = subCharacteristicRepository;
+        this.dimensionRepository = dimensionRepository;
+        this.subDimensionRepository = subDimensionRepository;
     }
+
 
     @Override
     public ProductDTOResponse createProduct(ProductDTOResponse productDTOResponse) {
 
         List<ImageDTOResponse> images = productDTOResponse.getImages();
         List<CharacteristicDTOResponse> characteristics = productDTOResponse.getCharacteristics();
+        List<DimensionDTOResponse> dimensions = productDTOResponse.getDimensions();
         List<SubCharacteristicDTOResponse> subCharacteristics = new ArrayList<>();
+        List<SubDimensionDTOResponse> subDimensions = new ArrayList<>();
 
         CategoryDTOResponse category = categoryRepository.findByCode(productDTOResponse.getCategory());
 
@@ -69,7 +73,6 @@ public class ProductServiceImpl implements ProductService {
 
         productDTOResponse.getCharacteristics().forEach(item -> {
                     subCharacteristics.addAll(item.getSubCharacteristic());
-                    System.out.println("TAGTAG   " + subCharacteristics);
 
                     characteristicRepository.findCharacteristicByProductId(product_id).forEach(characteristic -> {
 
@@ -77,6 +80,25 @@ public class ProductServiceImpl implements ProductService {
                             productRepository.createSubCharacteristic(subCharacteristic.getId(), subCharacteristic.getDescription(), subCharacteristic.getTitle(), characteristic.getId());
                         });
                         subCharacteristics.clear();
+                    });
+                }
+        );
+
+        System.out.println("TAGTAG  " + productDTOResponse.getDimensions());
+
+        for (DimensionDTOResponse dimension : dimensions) {
+            productRepository.createDimension(dimension.getId(), dimension.getTitle(), product_id);
+        }
+
+        productDTOResponse.getDimensions().forEach(item -> {
+                    subDimensions.addAll(item.getSubDimensions());
+
+                    dimensionRepository.findDimensionByProductId(product_id).forEach(dimension -> {
+
+                        subDimensions.forEach(subDimension -> {
+                            productRepository.createSubDimension(subDimension.getId(), subDimension.getSize(), dimension.getId());
+                        });
+                        subDimensions.clear();
                     });
                 }
         );
@@ -102,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
                 categoryRepository.findByCode(product.getCategory().getCode()),
                 product.getDateCreated(),
                 characteristicToDTO(product),
-                null,
+                dimensionToDTO(product),
                 imagesToDTO(product)
         );
     }
@@ -123,7 +145,7 @@ public class ProductServiceImpl implements ProductService {
                                     categoryRepository.findByCode(item.getCategory().getCode()),
                                     item.getDateCreated(),
                                     characteristicToDTO(item),
-                                    null,
+                                    dimensionToDTO(item),
                                     imagesToDTO(item)
                             )
                     );
@@ -144,31 +166,31 @@ public class ProductServiceImpl implements ProductService {
         return imageEntities;
     }
 
-    private List<CharacteristicEntity> characteristicToEntity(List<CharacteristicDTOResponse> characteristics) {
-        ArrayList<CharacteristicEntity> characteristicEntities = new ArrayList<>();
-        for (CharacteristicDTOResponse item : characteristics) {
-            characteristicEntities.add(new CharacteristicEntity(
-                    item.getId(),
-                    null,
-                    item.getTitle(),
-                    subCharacteristicToEntity(item.getSubCharacteristic())
-            ));
-        }
-        return characteristicEntities;
-    }
-
-    private List<SubCharacteristicEntity> subCharacteristicToEntity(List<SubCharacteristicDTOResponse> subCharacteristics) {
-        ArrayList<SubCharacteristicEntity> subCharacteristicEntities = new ArrayList<>();
-        for (SubCharacteristicDTOResponse item : subCharacteristics) {
-            subCharacteristicEntities.add(new SubCharacteristicEntity(
-                    item.getId(),
-                    null,
-                    item.getTitle(),
-                    item.getDescription()
-            ));
-        }
-        return subCharacteristicEntities;
-    }
+//    private List<CharacteristicEntity> characteristicToEntity(List<CharacteristicDTOResponse> characteristics) {
+//        ArrayList<CharacteristicEntity> characteristicEntities = new ArrayList<>();
+//        for (CharacteristicDTOResponse item : characteristics) {
+//            characteristicEntities.add(new CharacteristicEntity(
+//                    item.getId(),
+//                    null,
+//                    item.getTitle(),
+//                    subCharacteristicToEntity(item.getSubCharacteristic())
+//            ));
+//        }
+//        return characteristicEntities;
+//    }
+//
+//    private List<SubCharacteristicEntity> subCharacteristicToEntity(List<SubCharacteristicDTOResponse> subCharacteristics) {
+//        ArrayList<SubCharacteristicEntity> subCharacteristicEntities = new ArrayList<>();
+//        for (SubCharacteristicDTOResponse item : subCharacteristics) {
+//            subCharacteristicEntities.add(new SubCharacteristicEntity(
+//                    item.getId(),
+//                    null,
+//                    item.getTitle(),
+//                    item.getDescription()
+//            ));
+//        }
+//        return subCharacteristicEntities;
+//    }
 
     private List<ImageDTOResponse> imagesToDTO(ProductEntity product) {
         List<ImageDTOResponse> images = new ArrayList<>();
@@ -204,5 +226,28 @@ public class ProductServiceImpl implements ProductService {
             ));
         });
         return characteristics;
+    }
+
+    private List<DimensionDTOResponse> dimensionToDTO(ProductEntity product) {
+        List<SubDimensionDTOResponse> subDimensions = new ArrayList<>();
+        List<DimensionDTOResponse> dimensions = new ArrayList<>();
+        dimensionRepository.findDimensionByProductId(product.getId()).forEach(dimension -> {
+
+            subDimensionRepository.findSubDimensionByDimensionId(dimension.getId()).forEach(subDimension ->
+                    subDimensions.add(new SubDimensionDTOResponse(
+                            subDimension.getId(),
+                            subDimension.getSize(),
+                            subDimension.getDimension().getId()
+                    ))
+            );
+
+            dimensions.add(new DimensionDTOResponse(
+                    dimension.getId(),
+                    dimension.getTitle(),
+                    subDimensions,
+                    dimension.getProduct().getId()
+            ));
+        });
+        return dimensions;
     }
 }

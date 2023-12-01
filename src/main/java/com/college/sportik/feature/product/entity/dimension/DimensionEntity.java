@@ -23,5 +23,28 @@ public class DimensionEntity {
     @OneToMany(mappedBy = "dimension")
     private List<SubDimensionEntity> subDimensions;
 
+    DimensionEntity() {  }
 
+    public DimensionEntity(Integer id, ProductEntity product, String title, List<SubDimensionEntity> subDimensions) {
+        this.id = id;
+        this.product = product;
+        this.title = title;
+        this.subDimensions = subDimensions;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<SubDimensionEntity> getSubDimensions() {
+        return subDimensions;
+    }
 }

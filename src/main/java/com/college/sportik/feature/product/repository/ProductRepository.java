@@ -28,6 +28,16 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
     @Modifying
     @Transactional
+    @Query(value = "insert into dimension (dimension_id, title, product_id) VALUES (?1, ?2, ?3)", nativeQuery = true)
+    void createDimension(Integer id, String title, Integer product_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into sub_dimension (sub_dimension_id, size, dimension_id) VALUES (?1, ?2, ?3)", nativeQuery = true)
+    void createSubDimension(Integer id, String size, Integer dimension_id);
+
+    @Modifying
+    @Transactional
     @Query(value = "insert into characteristic (characteristic_id, title, product_id) VALUES (?1, ?2, ?3)", nativeQuery = true)
     void createCharacteristic(Integer id, String title, Integer product_id);
 

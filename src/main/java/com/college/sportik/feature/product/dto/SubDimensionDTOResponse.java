@@ -3,7 +3,7 @@ package com.college.sportik.feature.product.dto;
 public class SubDimensionDTOResponse {
 
     Integer id;
-    Integer size;
+    String size;
     Integer dimensionId;
 
     @Override
@@ -15,6 +15,12 @@ public class SubDimensionDTOResponse {
                 '}';
     }
 
+    public SubDimensionDTOResponse(Integer id, String size, Integer dimensionId) {
+        this.id = id;
+        this.size = size;
+        this.dimensionId = dimensionId;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -23,11 +29,11 @@ public class SubDimensionDTOResponse {
         this.id = id;
     }
 
-    public Integer getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
