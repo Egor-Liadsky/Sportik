@@ -25,6 +25,15 @@ public class CategoryEntity {
         this.code = code;
     }
 
+    @Override
+    public String toString() {
+        return "CategoryEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", code='" + code + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

@@ -7,16 +7,6 @@ public class SubCharacteristicDTOResponse {
     String description;
     Integer characteristicId;
 
-    @Override
-    public String toString() {
-        return "SubCharacteristicDTOResponse{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", characteristicId=" + characteristicId +
-                '}';
-    }
-
     public SubCharacteristicDTOResponse(Integer id, String title, String description, Integer characteristicId) {
         this.id = id;
         this.title = title;

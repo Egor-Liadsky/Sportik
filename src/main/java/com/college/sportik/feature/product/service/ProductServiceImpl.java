@@ -90,90 +90,27 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTOReceive getProductById(Long id) {
-//        ProductDTOReceive product = productRepository.findById(id).map(item ->
-//
-//            List<ImageDTOResponse> images = new ArrayList<>();
-//            imageRepository.findImagesByProductId(item.getId()).forEach(image -> {
-//                images.add(new ImageDTOResponse(
-//                        image.getId(),
-//                        image.getTitle(),
-//                        image.getProduct().getId()
-//                ));
-//            });
-//            List<SubCharacteristicDTOResponse> subCharacteristics = new ArrayList<>();
-//
-//            List<CharacteristicDTOResponse> characteristics = new ArrayList<>();
-//            characteristicRepository.findCharacteristicByProductId(item.getId()).forEach(characteristic -> {
-//
-//                subCharacteristicRepository.findSubCharacteristicByCharacteristicId(characteristic.getId()).forEach(subCharacteristic ->
-//                        subCharacteristics.add(new SubCharacteristicDTOResponse(
-//                                subCharacteristic.getId(),
-//                                subCharacteristic.getTitle(),
-//                                subCharacteristic.getDescription(),
-//                                characteristic.getId()
-//                        ))
-//                );
-//
-//                characteristics.add(new CharacteristicDTOResponse(
-//                        characteristic.getId(),
-//                        characteristic.getTitle(),
-//                        characteristic.getProduct().getId(),
-//                        subCharacteristics
-//                ));
-//            });
-//
-//            new ProductDTOReceive(
-//                    item.getId(),
-//                    item.getTitle(),
-//                    item.getBrand(),
-//                    item.getDescription(),
-//                    item.getColor(),
-//                    item.getPrice(),
-//                    item.getVendorCode(),
-//                    categoryRepository.findByCode(item.getCategory().getCode()),
-//                    item.getDateCreated(),
-//                    null,
-//                    null,
-//                    null
-//            );
-//            return
-//        );
-        return null;
+        ProductEntity product = productRepository.findProductById(id);
+        return new ProductDTOReceive(
+                product.getId(),
+                product.getTitle(),
+                product.getBrand(),
+                product.getDescription(),
+                product.getColor(),
+                product.getPrice(),
+                product.getVendorCode(),
+                categoryRepository.findByCode(product.getCategory().getCode()),
+                product.getDateCreated(),
+                characteristicToDTO(product),
+                null,
+                imagesToDTO(product)
+        );
     }
 
     @Override
     public List<ProductDTOReceive> getProducts() {
         List<ProductDTOReceive> products = new ArrayList<>();
         productRepository.findAll().forEach(item -> {
-                    List<ImageDTOResponse> images = new ArrayList<>();
-                    imageRepository.findImagesByProductId(item.getId()).forEach(image -> {
-                        images.add(new ImageDTOResponse(
-                                image.getId(),
-                                image.getTitle(),
-                                image.getProduct().getId()
-                        ));
-                    });
-                    List<SubCharacteristicDTOResponse> subCharacteristics = new ArrayList<>();
-
-                    List<CharacteristicDTOResponse> characteristics = new ArrayList<>();
-                    characteristicRepository.findCharacteristicByProductId(item.getId()).forEach(characteristic -> {
-
-                        subCharacteristicRepository.findSubCharacteristicByCharacteristicId(characteristic.getId()).forEach(subCharacteristic ->
-                                subCharacteristics.add(new SubCharacteristicDTOResponse(
-                                        subCharacteristic.getId(),
-                                        subCharacteristic.getTitle(),
-                                        subCharacteristic.getDescription(),
-                                        characteristic.getId()
-                                ))
-                        );
-
-                        characteristics.add(new CharacteristicDTOResponse(
-                                characteristic.getId(),
-                                characteristic.getTitle(),
-                                characteristic.getProduct().getId(),
-                                subCharacteristics
-                        ));
-                    });
                     products.add(
                             new ProductDTOReceive(
                                     item.getId(),
@@ -185,9 +122,9 @@ public class ProductServiceImpl implements ProductService {
                                     item.getVendorCode(),
                                     categoryRepository.findByCode(item.getCategory().getCode()),
                                     item.getDateCreated(),
-                                    characteristics,
+                                    characteristicToDTO(item),
                                     null,
-                                    images
+                                    imagesToDTO(item)
                             )
                     );
                 }
@@ -231,5 +168,41 @@ public class ProductServiceImpl implements ProductService {
             ));
         }
         return subCharacteristicEntities;
+    }
+
+    private List<ImageDTOResponse> imagesToDTO(ProductEntity product) {
+        List<ImageDTOResponse> images = new ArrayList<>();
+        imageRepository.findImagesByProductId(product.getId()).forEach(image -> {
+            images.add(new ImageDTOResponse(
+                    image.getId(),
+                    image.getTitle(),
+                    image.getProduct().getId()
+            ));
+        });
+        return images;
+    }
+
+    private List<CharacteristicDTOResponse> characteristicToDTO(ProductEntity product) {
+        List<SubCharacteristicDTOResponse> subCharacteristics = new ArrayList<>();
+        List<CharacteristicDTOResponse> characteristics = new ArrayList<>();
+        characteristicRepository.findCharacteristicByProductId(product.getId()).forEach(characteristic -> {
+
+            subCharacteristicRepository.findSubCharacteristicByCharacteristicId(characteristic.getId()).forEach(subCharacteristic ->
+                    subCharacteristics.add(new SubCharacteristicDTOResponse(
+                            subCharacteristic.getId(),
+                            subCharacteristic.getTitle(),
+                            subCharacteristic.getDescription(),
+                            characteristic.getId()
+                    ))
+            );
+
+            characteristics.add(new CharacteristicDTOResponse(
+                    characteristic.getId(),
+                    characteristic.getTitle(),
+                    characteristic.getProduct().getId(),
+                    subCharacteristics
+            ));
+        });
+        return characteristics;
     }
 }

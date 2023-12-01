@@ -22,4 +22,6 @@ public class DimensionEntity {
 
     @OneToMany(mappedBy = "dimension")
     private List<SubDimensionEntity> subDimensions;
+
+
 }

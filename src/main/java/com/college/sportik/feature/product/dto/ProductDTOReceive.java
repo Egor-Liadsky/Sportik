@@ -12,7 +12,7 @@ public class ProductDTOReceive {
     String color;
     String price;
     String vendorCode;
-    CategoryDTOResponse category_id;
+    CategoryDTOResponse category;
     String dateCreated;
 
     List<CharacteristicDTOResponse> characteristics;
@@ -29,7 +29,7 @@ public class ProductDTOReceive {
                 ", color='" + color + '\'' +
                 ", price='" + price + '\'' +
                 ", vendorCode='" + vendorCode + '\'' +
-                ", category_id=" + category_id +
+                ", category=" + category +
                 ", dateCreated='" + dateCreated + '\'' +
                 ", characteristics=" + characteristics +
                 ", dimensions=" + dimensions +
@@ -45,7 +45,7 @@ public class ProductDTOReceive {
         this.color = color;
         this.price = price;
         this.vendorCode = vendorCode;
-        this.category_id = category_id;
+        this.category = category_id;
         this.dateCreated = dateCreated;
         this.characteristics = characteristics;
         this.dimensions = dimensions;
@@ -108,12 +108,12 @@ public class ProductDTOReceive {
         this.vendorCode = vendorCode;
     }
 
-    public CategoryDTOResponse getCategory_id() {
-        return category_id;
+    public CategoryDTOResponse getCategory() {
+        return category;
     }
 
-    public void setCategory_id(CategoryDTOResponse category_id) {
-        this.category_id = category_id;
+    public void setCategory(CategoryDTOResponse category_id) {
+        this.category = category_id;
     }
 
     public String getDateCreated() {

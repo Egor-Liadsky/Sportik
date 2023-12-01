@@ -18,6 +18,9 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     @Query(value = "select * from product WHERE vendor_code = ?1", nativeQuery = true)
     ProductEntity findByVendorCode(String vendorCode);
 
+    @Query(value = "select * from product WHERE product_id = ?1", nativeQuery = true)
+    ProductEntity findProductById(Long id);
+
     @Modifying
     @Transactional
     @Query(value = "insert into image (image_id, title, product_id) VALUES (?1, ?2, ?3)", nativeQuery = true)

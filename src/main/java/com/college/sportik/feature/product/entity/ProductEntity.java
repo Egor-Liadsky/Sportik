@@ -67,6 +67,24 @@ public class ProductEntity {
         this.images = images;
     }
 
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "id=" + id +
+                ", vendorCode='" + vendorCode + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price='" + price + '\'' +
+                ", color='" + color + '\'' +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", category=" + category +
+                ", characteristics=" + characteristics +
+                ", dimensions=" + dimensions +
+                ", images=" + images +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
