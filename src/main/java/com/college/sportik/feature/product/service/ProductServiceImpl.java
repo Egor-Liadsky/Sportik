@@ -88,8 +88,6 @@ public class ProductServiceImpl implements ProductService {
                 }
         );
 
-        System.out.println("TAGTAG  " + productDTOResponse.getDimensions());
-
         for (DimensionDTOResponse dimension : dimensions) {
             productRepository.createDimension(dimension.getId(), dimension.getTitle(), product_id);
         }
@@ -247,28 +245,4 @@ public class ProductServiceImpl implements ProductService {
 
         return dimensions;
     }
-
-//    private List<DimensionDTOResponse> dimensionToDTO(ProductEntity product) {
-//        List<SubDimensionDTOResponse> subDimensions = new ArrayList<>();
-//        List<DimensionDTOResponse> dimensions = new ArrayList<>();
-//        dimensionRepository.findDimensionByProductId(product.getId()).forEach(dimension -> {
-//
-//            subDimensionRepository.findSubDimensionByDimensionId(dimension.getId()).forEach(subDimension -> {
-//                if (subDimension.getDimension().getId().equals(dimension.getId())){
-//                    subDimensions.add(new SubDimensionDTOResponse(
-//                            subDimension.getId(),
-//                            subDimension.getSize(),
-//                            subDimension.getDimension().getId()
-//                    ));
-//                }
-//            });
-//
-//            dimensions.add(new DimensionDTOResponse(
-//                    dimension.getId(),
-//                    dimension.getTitle(),
-//                    subDimensions,
-//                    dimension.getProduct().getId()
-//            ));
-//        });
-//        return dimensions;
 }
