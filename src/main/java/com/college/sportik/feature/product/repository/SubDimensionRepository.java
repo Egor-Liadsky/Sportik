@@ -10,6 +10,6 @@ import java.util.ArrayList;
 @Repository
 public interface SubDimensionRepository extends CrudRepository<SubDimensionEntity, Long> {
 
-    @Query(value = "select * from sub_dimension WHERE sub_dimension_id = ?1", nativeQuery = true)
+    @Query(value = "select * from sub_dimension WHERE dimension_id = ?1", nativeQuery = true)
     ArrayList<SubDimensionEntity> findSubDimensionByDimensionId(Integer dimension_id);
 }

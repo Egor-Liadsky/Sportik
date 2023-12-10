@@ -248,18 +248,20 @@ public class ProductServiceImpl implements ProductService {
         return dimensions;
     }
 
-//    private List<DimensionDTOResponse> dimensionToDTO2(ProductEntity product) {
+//    private List<DimensionDTOResponse> dimensionToDTO(ProductEntity product) {
 //        List<SubDimensionDTOResponse> subDimensions = new ArrayList<>();
 //        List<DimensionDTOResponse> dimensions = new ArrayList<>();
 //        dimensionRepository.findDimensionByProductId(product.getId()).forEach(dimension -> {
 //
-//            subDimensionRepository.findSubDimensionByDimensionId(dimension.getId()).forEach(subDimension ->
+//            subDimensionRepository.findSubDimensionByDimensionId(dimension.getId()).forEach(subDimension -> {
+//                if (subDimension.getDimension().getId().equals(dimension.getId())){
 //                    subDimensions.add(new SubDimensionDTOResponse(
 //                            subDimension.getId(),
 //                            subDimension.getSize(),
 //                            subDimension.getDimension().getId()
-//                    ))
-//            );
+//                    ));
+//                }
+//            });
 //
 //            dimensions.add(new DimensionDTOResponse(
 //                    dimension.getId(),
@@ -269,7 +271,4 @@ public class ProductServiceImpl implements ProductService {
 //            ));
 //        });
 //        return dimensions;
-//    }
-
-
 }
