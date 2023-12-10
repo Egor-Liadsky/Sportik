@@ -4,7 +4,9 @@ import com.college.sportik.feature.product.dto.ProductDTOReceive;
 import com.college.sportik.feature.product.dto.ProductDTOResponse;
 import com.college.sportik.feature.product.entity.ProductEntity;
 import com.college.sportik.feature.product.service.ProductService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,5 +33,10 @@ public class ProductController {
     @GetMapping
     List<ProductDTOReceive> getProducts() {
         return productService.getProducts();
+    }
+
+    @DeleteMapping("/{id}")
+    String deleteProductById(@PathVariable("id") Long id) {
+        return productService.deleteProductById(id);
     }
 }
